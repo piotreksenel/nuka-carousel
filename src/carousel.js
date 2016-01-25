@@ -143,12 +143,18 @@ const Carousel = React.createClass({
 
     return {
       onTouchStart(e) {
+        if (self.props.dragging === false) {
+          return null;
+        }
         self.touchObject = {
           startX: event.touches[0].pageX,
           startY: event.touches[0].pageY
         }
       },
       onTouchMove(e) {
+        if (self.props.dragging === false) {
+          return null;
+        }
         var direction = self.swipeDirection(
           self.touchObject.startX,
           e.touches[0].pageX,
@@ -174,9 +180,15 @@ const Carousel = React.createClass({
         });
       },
       onTouchEnd(e) {
+        if (self.props.dragging === false) {
+          return null;
+        }
         self.handleSwipe(e);
       },
       onTouchCancel(e) {
+        if (self.props.dragging === false) {
+          return null;
+        }
         self.handleSwipe(e);
       }
     }
