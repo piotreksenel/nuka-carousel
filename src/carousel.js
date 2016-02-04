@@ -168,7 +168,7 @@ const Carousel = React.createClass({
 
     return {
       onTouchStart(e) {
-        if (self.props.dragging === false) {
+        if (self.shouldDrag === false) {
           return null;
         }
         self.touchObject = {
@@ -177,7 +177,7 @@ const Carousel = React.createClass({
         }
       },
       onTouchMove(e) {
-        if (self.props.dragging === false) {
+        if (self.shouldDrag === false) {
           return null;
         }
         var direction = self.swipeDirection(
@@ -206,13 +206,13 @@ const Carousel = React.createClass({
         });
       },
       onTouchEnd(e) {
-        if (self.props.dragging === false) {
+        if (self.shouldDrag === false) {
           return null;
         }
         self.handleSwipe(e);
       },
       onTouchCancel(e) {
-        if (self.props.dragging === false) {
+        if (self.shouldDrag === false) {
           return null;
         }
         self.handleSwipe(e);
@@ -710,7 +710,8 @@ const Carousel = React.createClass({
         }
       }
     }
-  }
+  },
+  shouldDrag: true
 
 });
 
@@ -726,6 +727,9 @@ Carousel.ControllerMixin = {
     this.setState({
       carousels: data
     });
+  },
+  setDragging: function setDraggingValue(data) {
+    this.refs.carousel.shouldDrag = data;
   }
 }
 
